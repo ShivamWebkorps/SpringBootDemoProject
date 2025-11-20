@@ -1,0 +1,24 @@
+#! db-network-policy.yaml
+# Generated code, do not edit
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+    name: db-network-policy
+    namespace: springbootdemo
+spec:
+    podSelector:
+        matchLabels:
+            com.docker.compose.network.db: "true"
+    policyTypes:
+        - Ingress
+        - Egress
+    ingress:
+        - from:
+            - podSelector:
+                matchLabels:
+                    com.docker.compose.network.db: "true"
+    egress:
+        - to:
+            - podSelector:
+                matchLabels:
+                    com.docker.compose.network.db: "true"

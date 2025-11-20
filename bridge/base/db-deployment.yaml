@@ -1,0 +1,47 @@
+#! db-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: db
+    namespace: springbootdemo
+    labels:
+        com.docker.compose.project: springbootdemo
+        com.docker.compose.service: db
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: springbootdemo
+            com.docker.compose.service: db
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: springbootdemo
+                com.docker.compose.service: db
+                com.docker.compose.network.db: "true"
+        spec:
+            restartPolicy: unless-stopped
+            containers:
+                - name: postgres-spring-boot
+                  image: postgres:latest
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: PGDATA
+                      value: "/data/postgres"
+                    - name: POSTGRES_PASSWORD
+                      value: "password"
+                    - name: POSTGRES_USER
+                      value: "SDOCKER"
+                  ports:
+                    - name: db-5432
+                      containerPort: 5432
+                  volumeMounts:
+                    - name: data-postgres
+                      mountPath: /data/postgres
+            volumes:
+                - name: data-postgres
+                  persistentVolumeClaim:
+                    claimName: db-db

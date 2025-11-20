@@ -1,23 +1,17 @@
 services:
-  db:
-    container_name: postgres-spring-boot
-    image: postgres:latest
+  postgres:
+    image: postgres:15
+    container_name: postgres5332
     environment:
-      POSTGRES_USER: SDOCKER
-      POSTGRES_PASSWORD: password
-      PGDATA: /data/postgres
-    volumes:
-      - db:/data/postgres
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo123
+      POSTGRES_DB: demo
+      TZ: Asia/Kolkata
+      PGTZ: Asia/Kolkata
     ports:
-      - "5332:5432"
-    networks:
-      - db
-    restart: unless-stopped
-
-networks:
-  db:
-    driver: bridge
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
-  db:
-
+  postgres_data:

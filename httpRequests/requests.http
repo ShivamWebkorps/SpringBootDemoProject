@@ -1,0 +1,16 @@
+
+GET http://localhost:8080
+
+###
+GET http://localhost:8080/api/employees
+
+###
+POST http://localhost:8080/api/employees/3
+Content-Type: application/json
+
+{
+  "id": 3,
+  "name": "Arnav Arrora",
+  "email": "arnav@gmail.com",
+  "department": "Sales"
+},
