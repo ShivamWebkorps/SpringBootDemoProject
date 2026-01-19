@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigInteger;
+
 @Entity
 @Table(name = "employees")
 @Getter
@@ -29,13 +31,13 @@ public class Employee {
     private String telephoneCode;
     private String badgePrefix;
     @JsonIgnore
-    private Double deductions;
+    private BigInteger deductions;
     @JsonIgnore
-    private Double inHandSalary;
+    private BigInteger inHandSalary;
     @Transient
     @JsonProperty("CTC")
-    public Double getCTC() {
-        return inHandSalary + deductions;
+    public BigInteger getCTC() {
+        return inHandSalary.add(deductions);
     }
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

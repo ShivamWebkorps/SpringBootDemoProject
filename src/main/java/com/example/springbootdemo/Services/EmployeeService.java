@@ -7,9 +7,6 @@ import com.example.springbootdemo.Repository.ResultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,6 +55,6 @@ public class EmployeeService {
         response.setJsonResponse(jsonResponse);
 
         return responseRepository.save(response);
-    }
+     }
 
 }
